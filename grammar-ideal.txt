@@ -50,28 +50,28 @@ Time = "Time", "(",  Frequency, {Frequency}, ")"
           distance(2)
         } 
       }
-      frequency(20, 50){
-        amplitude(0,20){
+      Frequency(20, 50){
+        Amplitude(0,20){
           image("http://www.someotherURL.com")
           distance(3)
         }
       }
 
-      frequency(50-70){
-        amplitude(0,20){
+      Frequency(50-70){
+        Amplitude(0,20){
           distance(1)
         }
-        amplitude(20, 50){
+        Amplitude(20, 50){
           image("http://www.someotherURL.com")
           size(3);
         } 
-        amplitude(60,100){
+        Amplitude(60,100){
           image("http://www.someotherURL.com")
           size(4);
         }
 
-      frequency(70-100){
-        amplitude(0,50){
+      Frequency(70-100){
+        Amplitude(0,50){
           image('link')
         }
       }
