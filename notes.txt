@@ -1,0 +1,55 @@
+/*
+ * These are general notes on how i'd like a sample program to look
+ *
+ * 
+ * 
+ *
+ * 
+/*
+ Essentially 3 different areas of music that I'd like the user to be 
+ able to have affect. 
+
+ 1.) Time of the current song
+
+ 2.) Frequency range of the music
+
+ 3.) Amplitude of the sound at any given frequency range.  
+
+ For now, my goal is to allow the user to create simple frequency visualizer, which for now I hope will be created to look like the following:
+
+
+
+time(0, 100){
+	frequency(0, 20){
+		amplitude(0, 20){
+			object(image())
+		}	
+	}
+	frequency(20, 50){
+		amplitude(0,20){
+			image()
+		}
+	}
+
+	frequency(50-70){
+		amplitude(0,20){
+			image()
+		}
+		amplitude(20, 50){
+			image();
+			angle();
+			size();
+		} 
+		amplitude(60,100){
+			image('link')
+			angle();
+			size();
+			effect();
+		}
+
+	frequency(70-100){
+		amplitude(0,50){
+			image('link')
+		}
+	}
+}

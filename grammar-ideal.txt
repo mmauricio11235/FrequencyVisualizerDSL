@@ -1,0 +1,83 @@
+Names: Mauricio Molina
+Domain Specific Languages
+Professor Ben
+Date: November 15, 2014
+
+digit = "0" | nonzero_digit ;
+
+upper = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" ;
+
+lower  = "a" | "b" | "c" | "d" | "e" | "f" | "g"
+       | "h" | "i" | "j" | "k" | "l" | "m" | "n"
+       | "o" | "p" | "q" | "r" | "s" | "t" | "u"
+       | "v" | "w" | "x" | "y" | "z" ;
+
+interval = "(" digit, digit ")"
+
+char = digit | upper | lower
+
+size = "size" (digit)
+
+(*
+    Either points to local file location or an image URL from the internet. 
+* )
+
+imageURL = char | {char} 
+
+image = "image" "(" imageURL ")"
+
+distance = "distance", "(", digit, ")"
+
+Amplitude = "Amplitude", interval, "(" {size} | {image} ")"
+
+(* Each frequency definition would represent one of the bars on the frequency visualizer. *)
+Frequency = "Frequency", "(" Amplitude , {Amplitude}, ")"
+
+Time = "Time", "(",  Frequency, {Frequency}, ")"
+
+(*
+    // what it would look like:
+
+        
+    Time(0, 100){
+      Frequency(0, 20){
+        Amplitude(0, 20){
+          image("http://www.someurl.com")
+          size(10)
+          distance(2)
+        } 
+      }
+      frequency(20, 50){
+        amplitude(0,20){
+          image("http://www.someotherURL.com")
+          distance(3)
+        }
+      }
+
+      frequency(50-70){
+        amplitude(0,20){
+          distance(1)
+        }
+        amplitude(20, 50){
+          image("http://www.someotherURL.com")
+          size(3);
+        } 
+        amplitude(60,100){
+          image("http://www.someotherURL.com")
+          size(4);
+        }
+
+      frequency(70-100){
+        amplitude(0,50){
+          image('link')
+        }
+      }
+    }
+
+*)
+definition = Time, {Time}
+
+Actual_Grammar = {definition}
