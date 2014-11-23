@@ -12,16 +12,19 @@ import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.SwingUtilities;
+import javax.sound.sampled.LineEvent.Type;
+import javax.sound.sampled.*;
 
 
-public class musicCalc {
+public class musicCalc implements Runnable{
 	static Mixer.Info[] listOfMixers = AudioSystem.getMixerInfo();
 	static Clip clip;
 	static Line line; 
 	static FloatControl pan, volume, sampleRate; 
 	static int[][] graphData;
 	
-	public musicCalc(String musicFileLocation) throws LineUnavailableException, IOException, UnsupportedAudioFileException, InterruptedException{
+	public musicCalc(String musicFileLocation) throws LineUnavailableException, IOException, UnsupportedAudioFileException, InterruptedException {
 		// Open the example music file
 		String musicFile = musicFileLocation;
 		File file = new File(musicFile);
@@ -44,7 +47,7 @@ public class musicCalc {
         volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		sampleRate = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		System.out.println(sampleRate);
-        play();
+        //play();
         
 //		        clip.start();
         
@@ -67,23 +70,37 @@ public class musicCalc {
 		clip.setFramePosition(0);
 		volume.setValue((float) -20 );
 		clip.start();
+		
+		
+		while(clip.getMicrosecondLength() != clip.getMicrosecondPosition())
+		{
+		}
+		
 		pan = (FloatControl) clip.getControl(FloatControl.Type.PAN);
 		
-		int i = 0;
-		while(i < 100000000){
-        	
-        	i++;
-        	System.out.println("This is a pan: " + pan);
-        	System.out.println(volume);
-        	System.out.println(sampleRate);
-        	System.out.println(Math.sqrt(Math.abs(graphData[0][i])));
-		}
+//		int i = 0;
+//		while(i < 100000000){
+//        	
+//        	i++;
+//        	System.out.println("This is a pan: " + pan);
+//        	System.out.println(volume);
+//        	System.out.println(sampleRate);
+//        	System.out.println(Math.sqrt(Math.abs(graphData[0][i])));
+//		}
 		clip.drain();
 		clip.close();
 	}
 	
 	public void loop(){
 		
+	}
+	public void run(){
+		try {
+			play();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static int[][] getUnscaledAmplitude(byte[] eightBitByteArray, int nbChannels)
 	{

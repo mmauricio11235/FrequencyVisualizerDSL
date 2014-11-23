@@ -11,7 +11,7 @@ import objectdraw.*;
 
 public class FrequencyVisualizerDSL{
 
-	protected static DrawingCanvas canvas = new AWTFrameCanvas();
+	protected static AWTFrameCanvas canvas = new AWTFrameCanvas();
 	protected static DrawingCanvas VisualizerCanvas;
 	private static final long serialVersionUID = 1L;
 	private static Time newestDefinedTime; 
@@ -24,7 +24,7 @@ public class FrequencyVisualizerDSL{
 	 * @param args
 	 */
 	public void begin(){
-		new FilledRect(50,50,50,50, VisualizerCanvas);
+		canvas.windowActivated(null);
 	}
 	
 	
@@ -84,7 +84,7 @@ public class FrequencyVisualizerDSL{
 		return newImage;
 	}
 	public static void Image(){
-		new FramedRect(50,50,50,50,canvas);
+		//new FramedRect(50,50,50,50,canvas);
 	}
 		
 	/**
@@ -92,7 +92,7 @@ public class FrequencyVisualizerDSL{
 	 * @param musicFileLocation
 	 */
 	public static void setMusic(String musicFileLocation) throws LineUnavailableException, IOException, UnsupportedAudioFileException, InterruptedException{
-		new musicCalc(musicFileLocation);
+		new Thread(new musicCalc(musicFileLocation)).start();
 	}
 		
 		

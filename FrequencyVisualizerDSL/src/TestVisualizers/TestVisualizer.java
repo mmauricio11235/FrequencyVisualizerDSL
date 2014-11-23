@@ -15,14 +15,13 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 	 */
 	public static void main(String[] args) throws LineUnavailableException, IOException, UnsupportedAudioFileException, InterruptedException {
 		
-		//setMusic("C:\\Users\\Mauricio\\workspace\\SoundPracticex\\src\\Fun.wav");
-		//createVisualizer(500,500);
+		setMusic("C:\\Users\\Mauricio\\workspace\\SoundPracticex\\src\\Fun.wav");
 		
 		
 		Time(0,50);
 			Frequency(0,50);
 				Amplitude(0,100);
-					Image();
+					Image(new FilledRect(50,50,50,50, canvas));
 					Effect("Bounce");
 			Frequency(50,100);
 				Amplitude(0,100);
@@ -37,6 +36,14 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 				Amplitude(50,100);
 					Effect("Bounce");
 					Effect("Bounce");
+					
+			Thread.sleep(50000);
+			canvas.windowClosing(null);
+		
+		
 	}
+	
+	
+	
 
 }
