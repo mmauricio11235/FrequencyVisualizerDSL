@@ -32,8 +32,4 @@ public class FrequencyBar {
 			barImage.hide();
 		}
 	}
-	
-	public void setBackgroundImage(String imageURL){
-		
-	}
 }

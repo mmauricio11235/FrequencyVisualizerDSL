@@ -3,6 +3,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
@@ -20,7 +22,10 @@ public class FrequencyVisualizerDSL{
 	private static Amplitude newestAmplitude;
 	private static ArrayList<Time> definedTimeList = new ArrayList<Time>();
 	protected static java.awt.Image backgroundImage;
+	private static double runTimeInSeconds;
 	static VisibleImage background;
+	private static Image lastImage;
+	static Hashtable<Integer, ArrayList<Integer>> amplitudesForFrequencies = new Hashtable<Integer, ArrayList<Integer>>();
 	
 	/**
 	 * 
@@ -77,13 +82,18 @@ public class FrequencyVisualizerDSL{
 		return null;
 	}
 	
-	public Image Image(String imageLocation){
+//	public Image Image(String imageLocation){
+//		Image newImage = new Image(imageLocation);
+//		lastImage = newImage; 
+//		return newImage;
+//	}
+//	
+	public static Image Image(Resizable2DInterface imageLocation){
 		Image newImage = new Image(imageLocation);
-		return newImage;
-	}
-	
-	public static Image Image(DrawableInterface imageLocation){
-		Image newImage = new Image(imageLocation);
+		lastImage = newImage; 
+		ArrayList<Integer> random = createPsuedoData();
+		newImage.setAmplitudesOverTime(random);
+		new Thread(newImage).start();
 		return newImage;
 	}
 		
@@ -92,9 +102,34 @@ public class FrequencyVisualizerDSL{
 	 * @param musicFileLocation
 	 */
 	public static void setMusic(String musicFileLocation) throws LineUnavailableException, IOException, UnsupportedAudioFileException, InterruptedException{
-		new Thread(new musicCalc(musicFileLocation)).start();
+		musicCalc music = new musicCalc(musicFileLocation);
+		runTimeInSeconds = music.playTimeInSeconds();
+		new Thread(music).start();
+		System.out.println("Run time of the visualizer is: " +runTimeInSeconds);
+		createPsuedoData();
 	}
 	
+	/**
+	 * The analysis of sound is much more complicated than anticiapted. For now, 
+	 * creating data structure to simulate what data might look like
+	 * @return 
+	 */
+	private static ArrayList<Integer> createPsuedoData() {
+		ArrayList<Integer> random = new ArrayList<Integer>();
+		RandomIntGenerator  generator = new RandomIntGenerator(0,500); 
+		
+		for(int i = 0; i < runTimeInSeconds; i++){
+			random.add(generator.nextValue());
+		}
+		return random; 
+		
+	}
+	
+	public static void VisualizerStart(){
+		
+	}
+
+
 	/*
 	 * Sets the backgound image
 	 */

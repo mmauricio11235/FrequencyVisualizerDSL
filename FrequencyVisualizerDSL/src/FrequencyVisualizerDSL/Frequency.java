@@ -31,8 +31,4 @@ public class Frequency implements Runnable{
 		amplitudeList.add(newAmplitude);
 		
 	}
-	
-	
-	
-	
 }
