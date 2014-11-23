@@ -1,9 +1,10 @@
 package FrequencyVisualizerDSL;
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -11,13 +12,15 @@ import objectdraw.*;
 
 public class FrequencyVisualizerDSL{
 
-	protected static AWTFrameCanvas canvas = new AWTFrameCanvas();
+	protected static AWTFrameCanvas canvas = new AWTFrameCanvas(1000,1000);
 	protected static DrawingCanvas VisualizerCanvas;
 	private static final long serialVersionUID = 1L;
 	private static Time newestDefinedTime; 
 	private static Frequency newestFrequency;
 	private static Amplitude newestAmplitude;
 	private static ArrayList<Time> definedTimeList = new ArrayList<Time>();
+	protected static java.awt.Image backgroundImage;
+	static VisibleImage background;
 	
 	/**
 	 * 
@@ -83,9 +86,6 @@ public class FrequencyVisualizerDSL{
 		Image newImage = new Image(imageLocation);
 		return newImage;
 	}
-	public static void Image(){
-		//new FramedRect(50,50,50,50,canvas);
-	}
 		
 	/**
 	 * 
@@ -93,6 +93,17 @@ public class FrequencyVisualizerDSL{
 	 */
 	public static void setMusic(String musicFileLocation) throws LineUnavailableException, IOException, UnsupportedAudioFileException, InterruptedException{
 		new Thread(new musicCalc(musicFileLocation)).start();
+	}
+	
+	/*
+	 * Sets the backgound image
+	 */
+	public static void setBackgroundImage(String imageURL) throws IOException{
+	BufferedImage image = null;
+	URL url = new URL(imageURL);
+	image = ImageIO.read(url);
+	background = new VisibleImage(image, 0,0,canvas.getWidth(),canvas.getHeight(),canvas);
+	
 	}
 		
 		

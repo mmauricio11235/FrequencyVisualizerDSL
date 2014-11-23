@@ -16,7 +16,7 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 	public static void main(String[] args) throws LineUnavailableException, IOException, UnsupportedAudioFileException, InterruptedException {
 		
 		setMusic("C:\\Users\\Mauricio\\workspace\\SoundPracticex\\src\\Fun.wav");
-		
+		setBackgroundImage("https://d1mi3s36zg393u.cloudfront.net/event/207483/og/97118d4d45c44a0a9361a1b2aba8370c.image!jpeg.288619.jpg.EDC-event-image.jpg");
 		
 		Time(0,50);
 			Frequency(0,50);

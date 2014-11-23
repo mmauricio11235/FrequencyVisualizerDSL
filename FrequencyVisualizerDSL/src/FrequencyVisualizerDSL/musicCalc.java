@@ -29,11 +29,11 @@ public class musicCalc implements Runnable{
 		String musicFile = musicFileLocation;
 		File file = new File(musicFile);
 		
-		//This is code from http://stackoverflow.com/questions/4708613/graphing-the-pitch-frequency-of-a-sound
-		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(musicFile)));
-		byte[] bytes = new byte[(int) (audioInputStream.getFrameLength()) * (audioInputStream.getFormat().getFrameSize())];
-		audioInputStream.read(bytes);
-		graphData = getUnscaledAmplitude(bytes, 3);
+//		//This is code from http://stackoverflow.com/questions/4708613/graphing-the-pitch-frequency-of-a-sound
+//		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(musicFile)));
+//		byte[] bytes = new byte[(int) (audioInputStream.getFrameLength()) * (audioInputStream.getFormat().getFrameSize())];
+//		audioInputStream.read(bytes);
+//		graphData = getUnscaledAmplitude(bytes, 3);
 
 		
 		if(file.exists()){	
@@ -41,6 +41,9 @@ public class musicCalc implements Runnable{
 		clip = AudioSystem.getClip();
 		line = AudioSystem.getLine(clip.getLineInfo());
 		AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
+		long frames = ais.getFrameLength();
+		AudioFormat format = ais.getFormat();
+		double durationInSeconds = (frames+0.0) / format.getFrameRate(); 
 		
         clip.open(ais);
         int i = 0;
