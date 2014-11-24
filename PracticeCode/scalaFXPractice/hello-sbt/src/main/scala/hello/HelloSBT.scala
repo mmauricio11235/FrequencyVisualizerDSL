@@ -17,6 +17,8 @@
 //     }
 //   }
 // }
+
+//This code was from a tutorial found at https://code.google.com/p/scalafx/source/browse/scalafx-hello-world/src/main/scala/hello/ScalaFXHelloWorld.scala
 package hello
 
 import scalafx.application.JFXApp
