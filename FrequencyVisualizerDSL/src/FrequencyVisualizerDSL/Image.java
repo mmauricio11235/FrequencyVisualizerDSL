@@ -2,6 +2,7 @@ package FrequencyVisualizerDSL;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 import objectdraw.*;
 
@@ -9,9 +10,12 @@ public class Image implements Runnable {
 
 	private String animationType;
 	private ArrayList<Integer> amplitudesOverTime;
-	private int pauseTime = 1000;
+	private int pauseTime = 100;
+	private RandomIntGenerator randomSleepTime = new RandomIntGenerator(100,300);
 	private Resizable2DInterface image; 
+	private Random rand = new Random();
 	public Image(String imageLocation) {
+	
 
 	}
 
@@ -26,10 +30,15 @@ public class Image implements Runnable {
 		image.setColor(Color.white);
 //		if (animationType == "bounce") {
 			while(i <  amplitudesOverTime.size()){
+				float r = rand.nextFloat() % 1;
+				float g = rand.nextFloat() % 1;
+				float b = rand.nextFloat() % 1;
 				System.out.println("Reached animate effectively: " + i);
 				image.setHeight(amplitudesOverTime.get(i));
+				image.setColor(new Color(r,g,b));
 				i++;
-				Thread.sleep(125);
+				pauseTime = randomSleepTime.nextValue();
+				Thread.sleep((long)pauseTime);
 			//}
 		}
 	}

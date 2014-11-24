@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
@@ -22,7 +21,7 @@ public class FrequencyVisualizerDSL{
 	private static Amplitude newestAmplitude;
 	private static ArrayList<Time> definedTimeList = new ArrayList<Time>();
 	protected static java.awt.Image backgroundImage;
-	private static double runTimeInSeconds;
+	protected static double runTimeInSeconds;
 	static VisibleImage background;
 	private static Image lastImage;
 	static Hashtable<Integer, ArrayList<Integer>> amplitudesForFrequencies = new Hashtable<Integer, ArrayList<Integer>>();
@@ -76,7 +75,7 @@ public class FrequencyVisualizerDSL{
 	 */
 	public static Effect Effect(String effect){
 		if(effect.equals("Bounce")){
-		return new Bounce();
+		
 		
 	}		
 		return null;
@@ -116,7 +115,7 @@ public class FrequencyVisualizerDSL{
 	 */
 	private static ArrayList<Integer> createPsuedoData() {
 		ArrayList<Integer> random = new ArrayList<Integer>();
-		RandomIntGenerator  generator = new RandomIntGenerator(0,500); 
+		RandomIntGenerator  generator = new RandomIntGenerator(100,500); 
 		
 		for(int i = 0; i < runTimeInSeconds; i++){
 			random.add(generator.nextValue());
@@ -126,7 +125,7 @@ public class FrequencyVisualizerDSL{
 	}
 	
 	public static void VisualizerStart(){
-		
+		//TO-DO: Once all the elements have been taken into acccount, create all threads and start them
 	}
 
 
