@@ -13,7 +13,7 @@ import objectdraw.*;
 
 public class FrequencyVisualizerDSL{
 
-	protected static AWTFrameCanvas canvas = new AWTFrameCanvas(1000,1000);
+	protected static AWTFrameCanvas canvas = new AWTFrameCanvas(800,800);
 	protected static DrawingCanvas VisualizerCanvas;
 	private static final long serialVersionUID = 1L;
 	private static Time newestDefinedTime; 

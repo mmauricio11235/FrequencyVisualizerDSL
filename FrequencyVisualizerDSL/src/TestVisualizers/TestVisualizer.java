@@ -8,31 +8,32 @@ import FrequencyVisualizerDSL.*;
 import objectdraw.*;
 
 public class TestVisualizer extends FrequencyVisualizerDSL{
+	//What about having GUIs? Have sliders and allow people to place object they want to be animated
+	
 	
 	public static void main(String[] args) throws LineUnavailableException, IOException, 
 	UnsupportedAudioFileException, InterruptedException {
 		
 		setMusic("src/Ellie Goulding - Lights (MetroGnome ELECTRO REMIX).wav");
 		setBackgroundImage("https://d1mi3s36zg393u.cloudfront.net/event/207483/og/"
-				+ "97118d4d45c44a0a9361a1b2aba8370c.image!jpeg.288619.jpg.EDC-event-image.jpg");
-		
+		+ "97118d4d45c44a0a9361a1b2aba8370c.image!jpeg.288619.jpg.EDC-event-image.jpg");
+		//setDimensions();
 		
 		Time(0,100);
 		Frequency(0,10);
-			Amplitude(0,100);
+			Amplitude(0,50);
 				Image(new FilledRect(0,50,100,50, canvas));
+					//Maybe use Enum instead of a string? 
+					Effect("Bounce");
+				Image(new FilledRect(50,50,100,50, canvas));
 					Effect("Bounce");
 		Frequency(10,20);
 			Amplitude(0,100);
 				Image(new FilledRect(100,50,100,50, canvas));
 					Effect("Bounce");
-		Frequency(10,20);
-			Amplitude(0,100);
-				Image(new FilledRect(200,50,100,50, canvas));
-					Effect("Bounce");
 		Frequency(20,30);
 			Amplitude(0,100);
-				Image(new FilledRect(300,50,100,50, canvas));
+				Image(new FilledOval(300,50,100,50, canvas));
 					Effect("Bounce");
 		Frequency(30,40);
 			Amplitude(0,100);	
@@ -59,9 +60,9 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 				Image(new FilledRect(900,50,100,50, canvas));
 					Effect("Bounce");
 		
-		Thread.sleep((long) (runTimeInSeconds * 1000));
-		canvas.windowClosing(null);
-				
+//		Thread.sleep((long) (runTimeInSeconds * 1000));
+//		canvas.windowClosing(null);
+//				
 		
 		
 		/**
