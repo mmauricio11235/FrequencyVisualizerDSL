@@ -10,10 +10,12 @@ public class Image implements Runnable {
 
 	private String animationType;
 	private ArrayList<Integer> amplitudesOverTime;
+	private int amplitudeThreshold = 0; 
 	private int pauseTime = 100;
 	private RandomIntGenerator randomSleepTime = new RandomIntGenerator(100,300);
 	private Resizable2DInterface image; 
 	private Random rand = new Random();
+	
 	public Image(String imageLocation) {
 	
 
@@ -24,6 +26,9 @@ public class Image implements Runnable {
 		image = imageLocation;
 	}
 
+	public void setAmplitudeThreshold(int threshold){
+		amplitudeThreshold = threshold;
+	}
 	// TODO
 	public void animate() throws InterruptedException {
 		int i = 0; 

@@ -65,6 +65,7 @@ public class FrequencyVisualizerDSL{
 		Time newTime = new Time(start, end);
 		newestDefinedTime = newTime;
 		definedTimeList.add(newTime);
+		newestDefinedTime.setRunTimeInSeconds(runTimeInSeconds);
 		return newTime;
 	}
 	
@@ -91,8 +92,9 @@ public class FrequencyVisualizerDSL{
 		Image newImage = new Image(imageLocation);
 		lastImage = newImage; 
 		ArrayList<Integer> random = createPsuedoData();
+		newestFrequency.addImage(newImage);
 		newImage.setAmplitudesOverTime(random);
-		new Thread(newImage).start();
+//		new Thread(newImage).start();
 		return newImage;
 	}
 		
@@ -126,6 +128,9 @@ public class FrequencyVisualizerDSL{
 	
 	public static void VisualizerStart(){
 		//TO-DO: Once all the elements have been taken into acccount, create all threads and start them
+		for(Time x : definedTimeList){
+			new Thread(x).start();
+		}
 	}
 
 

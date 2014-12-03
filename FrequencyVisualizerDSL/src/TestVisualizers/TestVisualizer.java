@@ -59,10 +59,10 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 			Amplitude(0,100);	
 				Image(new FilledRect(900,50,100,50, canvas));
 					Effect("Bounce");
+					
+		VisualizerStart();
 		
-//		Thread.sleep((long) (runTimeInSeconds * 1000));
-//		canvas.windowClosing(null);
-//				
+				
 		
 		
 		/**
