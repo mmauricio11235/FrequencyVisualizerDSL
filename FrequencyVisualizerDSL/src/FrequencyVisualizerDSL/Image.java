@@ -61,4 +61,12 @@ public class Image implements Runnable {
 		
 		amplitudesOverTime = random;
 }
+
+	public void hide() {
+		// TODO Auto-generated method stub
+		image.hide();
+	}
+	public void show(){
+		image.show();
+	}
 }

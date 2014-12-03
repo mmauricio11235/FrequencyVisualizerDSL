@@ -19,6 +19,8 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		+ "97118d4d45c44a0a9361a1b2aba8370c.image!jpeg.288619.jpg.EDC-event-image.jpg");
 		//setDimensions();
 		
+		//Cool time to start is 5ish. That's where beat starts.
+		
 		Time(5,100);
 		Frequency(0,10);
 			Amplitude(0,50);

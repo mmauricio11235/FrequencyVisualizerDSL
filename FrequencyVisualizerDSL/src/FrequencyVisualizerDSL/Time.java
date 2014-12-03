@@ -62,6 +62,7 @@ public class Time implements Runnable {
 		for (Frequency x : frequencyList) {
 			ArrayList<Image> currentImages = x.getImageList();
 			for (Image y : currentImages) {
+				y.show();
 				new Thread(y).start();
 				System.out.print("Got to the images");
 

@@ -100,6 +100,7 @@ public class FrequencyVisualizerDSL {
 	public static Image Image(Resizable2DInterface imageLocation) {
 		Image newImage = new Image(imageLocation);
 		lastImage = newImage;
+		newImage.hide();
 		ArrayList<Integer> random = createPsuedoData();
 		newestFrequency.addImage(newImage);
 		newImage.setAmplitudesOverTime(random);
