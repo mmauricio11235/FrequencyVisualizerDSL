@@ -1,30 +1,40 @@
 Critique for Week Ending on December 2
-Chloe Calvarin
+Matt Cook
 
-## Response to Project Description:
+Addressing questions in notebook:
 
-**Personal background for context**
+* One of the criticisms that I received was that my language isn't very intuitive as is now. The [recommendation seen here](https://github.com/mmauricio11235/FrequencyVisualizerDSL/blob/master/critiques/November%2025.md) shows what Chloe believes would be more intuitive, but it is difficult to do in Java. One possibility is to use camel case, but then it's just very long names. Do you have any other ideas? 
 
-I've been messing around with creating animated films that work with music, in the historical tradition of "visual music," which isn't quite the same as creating a visualization of the sounds using the frequency space. For what I've been doing, most drawing can create a ton of frames, and stringing them together into a film is relatively simple, all you need is ffmpeg or the like. This takes forever, obviously, but there are definitely other options. Any drawing tool will let you create and edit images, and save them as frame#.png, but there are some more specialized tools that allow for frame-by-frame animation. 
+I think in terms of words used, it really is fine as it is now as long as it is well-defined in some API that each
+of those function calls says that the arguments are for a range. It would be tedious and repetitive for the user to 
+need to say it is a range again and again after they are used to it after the first time they use it.
 
-* [POV-Ray](http://www.povray.org/) is a 3D graphics programming language with a "clock" variable that allows the artist to define the dependence of objects' characteristics on this value, and then generates the frames. 
-* [Processing](https://www.processing.org/) is another graphic programming language that has animation functionality. 
+The main concern I would say is with nesting. Right now it is not intuitive in any way what is nested other than by 
+indentation. I mention this below, but I think the language can benefit from implicit arguments (i.e. define the range as (0,100) if not specified). That does not seem possible with the way it currently is, and as Chloe mentioned, the only way to know how attributes relate is by user-set arbitrary indentation. As an internal DSL, this could be more difficult without the use of parsing. 
 
-**Interesting design questions for this project**
+As an internal DSL, I cannot currently think of an easy way to do so, but one completely different alternative could be to define each image on one line. For example, you could have 
+```
+Visualize([Image], [Effect], [TimeRange], [FrequencyRange], [AmplitudeRange])
+```
+The user would probably be doing a lot of copy-pasting for this, though that may be the case for the current language. You can define a class (or use a Java one) for the intervals, and the user can even define variables initially then for these, for example:
+```
+Interval time1 = Interval(0,50);
+Interval time2 = Interval(50,100);
+Interval freq1 = ...
+```
+And then the code could possibly be even cleaner for definition (cannot guarantee the truth to this, just in my mind currently it might).
 
-Compared to the above, I think the key difference of what you're suggesting is the link with music, along with the suggestion that the artist/creator will *not* have complete control, only the power of suggestion. The examples you show provide this functionality, but do so in a super-powerful tool that is out of reach, both in terms of expense and the amount of time it takes to learn the tool. I think it'd be really cool if you can do this well, but I'm currently having difficulty seeing what aspects of the process you want to automate, what will be left to the user, and what you wish to add randomness too, a la ContextFree.
 
-A major design challenge I foresee is being able to create the frequency & amplitude link with visuals in a way that doesn't seem too clear-cut, so that your language's output will seem natural despite the limited scope of tools. If, say, someone wants the melody in the upper register to be visualized by bounding circles, and the lower register and bass notes to be represented differently, the intersection is going to be difficult. Some notes in the melody might be lower than the higher notes of the bass line, for example, and having a harsh frequency cutoff might make this look weird. Or, percussive sounds occur in all frequencies, so you either need to accept this or try to take events that span most of the frequency space as seperate somehow. At that point, this becomes a STEMs problem, and I'm sure you don't want to go too far into that, but it's a question to keep in mind. 
+* Do you have any resources on Fourier Fast Transforms (FFT's) such as example projects or simple libraries that I might be able to work with. 
 
-It seems your current goal bypasses this by having the frequency plot be the main element, but I'm not too clear on that. Describing your idea in terms of what is linked to frequency and what to amplitude at a frequency might make this easier to understand. The terms "magnitude" and "amplitude" are thrown around, and I assume you know what you mean, but this wasn't too clear to me. Is the "sound bar" the frequency spectrum?
+Here is one package for Java called [JTransforms](https://sites.google.com/site/piotrwendykier/software/jtransforms) that seems promising. At the link there are also example projects of visualizers and a MusicReader (which turns music pages as you play I guess), which both could be part of distinct portions of your project. I haven't looked deeply into it, but if you decide to try to get this working it looks promising.
 
-I think you should more clearly define what your objects, animations, and rules are first. This will lead to necessary questions about your syntax in the IR/functional version, as well as potential consideration of how it translates to a visual interface and how easily it can later be extended. Until you define this more specifically, I think it'll be easy to get side-tracked with all those additional concerns you mention (default values, range, formats, errors.)
+Another one is [FFTW](http://www.fftw.org/download.html) which has a Java wrapper to use it. This is supposed to be a really fast one, and might be worth looking at the API to see which of these is easiest to do what you want. At the bottom of that link is example projects as well.
 
-## Response to Project Plan
+* Do you think that there needs to be a strict binding of amplitude to frequency? Do you think that a strict structure makes the language simpler to work with? 
 
-**Maximizing time on language design**
+To me (with hardly any music creation experience at all), it would seem to make sense as you want to "filter" the sounds of some given amplitude at a frequency, rather than just any sound at high amplitude as that seems less useful. If you were to make it more lax of a requirement as that would seem to be a good compromise (allowing for both, as it can make sense without the binding too), then I would say it could be ideal, but possibly much harder to reason about in terms of possible errors. 
 
-As I said above, I think you should spend a lot of time ironing out the design of your IR, in terms of the basic functionality you wish to provide, and of the syntax, to work towards your goal of making this simple and easy to learn even for non-programmers. Your plan seems to have this same goal, so that's hopefully fine. You might want to start sketching out potential 'programs' and their results, before even looking at the APIs you'll be using, as you want your idea to influence how you learn your tools, and not the other way around. This should help prevent spending too much time on the tool-learning. I'm looking forward to seeing sample programs! If you think of multiple possible syntaxes, please include them, it'll help clarify what decisions you've made on design. 
+One thing I would say is that you can have implicit parameters. For example, if you don't specify amplitude it defaults to all of them, if you see an amplitude without frequency, assume all frequencies. This would probably make more sense, though your language may need to alter syntax a bit to ensure the block structure correctly.
 
-I think it'll be easy to get bogged down by how to deconstruct the music into usable signals, so be careful! 
 
