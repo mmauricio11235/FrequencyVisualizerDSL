@@ -27,33 +27,29 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		
 		Time(0,5);
 			Frequency(40,50);
-			Amplitude(0,100);	
-				Image(new FilledOval(500,50,10,10, canvas));
-					Effect("random");
-		Time(1,5);
+				Amplitude(0,100);	
+				for (int i =0; i < 10; i++){	
+					Image(new FilledOval(500,50,10,10, canvas));
+						Effect("random");
+				}
+		Time(2.5,5);
 			Frequency(40,50);
 			Amplitude(0,100);	
+			for (int i =0; i < 30; i++){	
 				Image(new FilledOval(500,50,10,10, canvas));
 					Effect("random");
-		Time(2,5);
-			Frequency(40,50);
-			Amplitude(0,100);	
-				Image(new FilledOval(500,50,10,10, canvas));
-					Effect("random");
-					Image(new FilledOval(500,50,10,10, canvas));
-					Effect("random");
-					Image(new FilledOval(500,50,10,10, canvas));
-					Effect("random");
-		Time(3,50);
-		Frequency(40,50);
-		Amplitude(0,100);	
-			Image(new FilledOval(500,50,10,10, canvas));
-			for (int i =0; i < 100; i++){	
-			Effect("random");
-				Image(new FilledOval(500,50,10,10, canvas));
 			}
+		Time(4,50);
+			Frequency(40,50);
+				Amplitude(0,100);	
+				for (int i =0; i < 50; i++){	
+					Image(new FilledOval(500,50,10,10, canvas));
+						Effect("random");
+					Image(new FilledOval(500,50,20,20, canvas));
+						Effect("random");
+				}
 					
-		Time(5.8,100);
+		Time(5.7,100);
 		Frequency(0,10);
 			Amplitude(0,50);
 				Image(new FilledRect(0,50,100,50, canvas));
@@ -95,23 +91,6 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 					Effect("Bounce");
 					
 		VisualizerStart();
-		
-				
-		
-		
-		/**
-		 * Example of similar code using java for loop. 			
-		 */
-//		Time(0,50);
-//		for(int i = 0; i <= 100; i+=10){
-//			Frequency(i, i+10);
-//				Amplitude(0,100);
-//				for(int j = 0; j < 1000; j+=50){
-//					Image(new FilledRect(j,50,50,50, canvas));
-//						Effect("Bounce");					
-//				}
-//
-//		}
 			
 		
 	}

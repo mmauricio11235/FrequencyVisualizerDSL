@@ -133,7 +133,7 @@ public class FrequencyVisualizerDSL {
 		ArrayList<Integer> random = new ArrayList<Integer>();
 		RandomIntGenerator generator = new RandomIntGenerator(20, 500);
 
-		for (int i = 0; i < runTimeInSeconds; i++) {
+		for (int i = 0; i < runTimeInSeconds * 100; i++) {
 			random.add(generator.nextValue());
 		}
 		return random;
