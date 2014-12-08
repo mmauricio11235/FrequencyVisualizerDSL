@@ -25,7 +25,26 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		
 		//Cool time to start is 5ish. That's where beat starts.
 		
-		Time(0,100);
+		Time(0,5);
+			Frequency(40,50);
+			Amplitude(0,100);	
+				Image(new FilledOval(500,50,20,20, canvas));
+					Effect("random");
+		Time(1,5);
+			Frequency(40,50);
+			Amplitude(0,100);	
+				Image(new FilledOval(500,50,20,20, canvas));
+					Effect("random");
+		Time(2,5);
+			Frequency(40,50);
+			Amplitude(0,100);	
+				Image(new FilledOval(500,50,20,20, canvas));
+					Effect("random");
+					Image(new FilledOval(500,50,20,20, canvas));
+					Effect("random");
+					Image(new FilledOval(500,50,20,20, canvas));
+					Effect("random");
+		Time(5.2,100);
 		Frequency(0,10);
 			Amplitude(0,50);
 				Image(new FilledRect(0,50,100,50, canvas));

@@ -58,12 +58,12 @@ public class FrequencyVisualizerDSL {
 
 	/**
 	 * 
-	 * @param start
+	 * @param d
 	 * @param end
 	 * @return
 	 */
-	public static Time Time(int start, int end) {
-		Time newTime = new Time(start, end);
+	public static Time Time(double d, int end) {
+		Time newTime = new Time(d, end);
 		newestDefinedTime = newTime;
 		definedTimeList.add(newTime);
 		newestDefinedTime.setRunTimeInSeconds(runTimeInSeconds);
@@ -100,6 +100,7 @@ public class FrequencyVisualizerDSL {
 		ArrayList<Integer> random = createPsuedoData();
 		newestFrequency.addImage(newImage);
 		newImage.setAmplitudesOverTime(random);
+		newImage.setEndTime(10000000);
 		return newImage;
 	}
 

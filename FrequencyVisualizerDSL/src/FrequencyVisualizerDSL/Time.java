@@ -6,23 +6,23 @@ import objectdraw.*;
 
 public class Time implements Runnable {
 
-	private int startTime, endTime;
+	private double startTime, endTime;
 	private ArrayList<Frequency> frequencyList = new ArrayList<Frequency>();
 	private int numFrequencies = 0;
 	private int maxFrequencies = 10;
 	private double runTimeInSeconds;
 
-	public Time(int start, int end) {
-		startTime = start;
+	public Time(double d, int end) {
+		startTime = d;
 		endTime = end;
 	}
 
 	public int getStartTime() {
-		return startTime;
+		return (int) startTime;
 	}
 
 	public int getEndTime() {
-		return endTime;
+		return (int) endTime;
 	}
 
 	public void setStartTime(int newStartTime) {

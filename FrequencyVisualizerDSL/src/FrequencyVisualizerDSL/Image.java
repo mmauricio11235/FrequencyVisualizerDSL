@@ -17,6 +17,7 @@ public class Image implements Runnable {
 			300);
 	private Resizable2DInterface image;
 	private Random rand = new Random();
+	private long startTime, endTime;
 
 	public Image(String imageLocation) {
 
@@ -33,6 +34,8 @@ public class Image implements Runnable {
 
 	// TODO
 	public void animate() throws InterruptedException {
+		startTime = System.currentTimeMillis();
+		//while(System.currentTimeMillis() - startTime < endTime){
 		int i = 0;
 		image.setColor(Color.white);
 		if (animationType == "Bounce" || animationType == "bounce") {
@@ -51,17 +54,22 @@ public class Image implements Runnable {
 		}
 
 		else if (animationType == "random" || animationType == "Random") {
+			i++;
 			while (i < amplitudesOverTime.size()) {
-				image.moveTo(amplitudesOverTime.get(i),i);
+				image.moveTo(amplitudesOverTime.get(i-1),amplitudesOverTime.get(i));
+				image.show();
 				Thread.sleep((long) pauseTime);
 				pauseTime = randomSleepTime.nextValue();
+				
+				image.hide();
+				Thread.sleep(50);
 				System.out.println("Hot hurr");
 				i++;
 				
 			}
 		}
 	}
-
+	
 	public void run() {
 		// TODO
 		try {
@@ -87,5 +95,8 @@ public class Image implements Runnable {
 
 	public void setAnimationType(String animation) {
 		animationType = animation;
+	}
+	public void setEndTime(double d){
+		
 	}
 }
