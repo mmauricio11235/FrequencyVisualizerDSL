@@ -25,6 +25,7 @@ public class FrequencyVisualizerDSL {
 	static VisibleImage background;
 	private static Image lastImage;
 	static Hashtable<Integer, ArrayList<Integer>> amplitudesForFrequencies = new Hashtable<Integer, ArrayList<Integer>>();
+	private static double timeIncrement;
 
 	/**
 	 * 
@@ -100,8 +101,10 @@ public class FrequencyVisualizerDSL {
 		ArrayList<Integer> random = createPsuedoData();
 		newestFrequency.addImage(newImage);
 		newImage.setAmplitudesOverTime(random);
-		newImage.setEndTime(10000000);
-		return newImage;
+		newImage.setEndTime(newestDefinedTime.getEndTime());
+		newImage.setRunTime(timeIncrement * (newestDefinedTime.getEndTime() - newestDefinedTime.getStartTime()));
+		newImage.setStartTime(newestDefinedTime.getStartTime())
+;		return newImage;
 	}
 
 	/**
@@ -113,6 +116,7 @@ public class FrequencyVisualizerDSL {
 			UnsupportedAudioFileException, InterruptedException {
 		musicCalc music = new musicCalc(musicFileLocation);
 		runTimeInSeconds = music.playTimeInSeconds();
+		timeIncrement = runTimeInSeconds / 100;
 		new Thread(music).start();
 		System.out
 				.println("Run time of the visualizer is: " + runTimeInSeconds);
@@ -127,7 +131,7 @@ public class FrequencyVisualizerDSL {
 	 */
 	private static ArrayList<Integer> createPsuedoData() {
 		ArrayList<Integer> random = new ArrayList<Integer>();
-		RandomIntGenerator generator = new RandomIntGenerator(100, 500);
+		RandomIntGenerator generator = new RandomIntGenerator(20, 500);
 
 		for (int i = 0; i < runTimeInSeconds; i++) {
 			random.add(generator.nextValue());

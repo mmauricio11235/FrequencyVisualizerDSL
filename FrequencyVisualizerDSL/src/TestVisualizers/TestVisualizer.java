@@ -28,23 +28,32 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		Time(0,5);
 			Frequency(40,50);
 			Amplitude(0,100);	
-				Image(new FilledOval(500,50,20,20, canvas));
+				Image(new FilledOval(500,50,10,10, canvas));
 					Effect("random");
 		Time(1,5);
 			Frequency(40,50);
 			Amplitude(0,100);	
-				Image(new FilledOval(500,50,20,20, canvas));
+				Image(new FilledOval(500,50,10,10, canvas));
 					Effect("random");
 		Time(2,5);
 			Frequency(40,50);
 			Amplitude(0,100);	
-				Image(new FilledOval(500,50,20,20, canvas));
+				Image(new FilledOval(500,50,10,10, canvas));
 					Effect("random");
-					Image(new FilledOval(500,50,20,20, canvas));
+					Image(new FilledOval(500,50,10,10, canvas));
 					Effect("random");
-					Image(new FilledOval(500,50,20,20, canvas));
+					Image(new FilledOval(500,50,10,10, canvas));
 					Effect("random");
-		Time(5.2,100);
+		Time(3,50);
+		Frequency(40,50);
+		Amplitude(0,100);	
+			Image(new FilledOval(500,50,10,10, canvas));
+			for (int i =0; i < 100; i++){	
+			Effect("random");
+				Image(new FilledOval(500,50,10,10, canvas));
+			}
+					
+		Time(5.8,100);
 		Frequency(0,10);
 			Amplitude(0,50);
 				Image(new FilledRect(0,50,100,50, canvas));
@@ -67,7 +76,7 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		Frequency(40,50);
 			Amplitude(0,100);	
 				Image(new FilledRect(500,50,100,50, canvas));
-					Effect("random");
+					Effect("bounce");
 		Frequency(50,60);
 			Amplitude(0,100);	
 				Image(new FilledRect(600,50,100,50, canvas));

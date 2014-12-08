@@ -17,7 +17,10 @@ public class Image implements Runnable {
 			300);
 	private Resizable2DInterface image;
 	private Random rand = new Random();
-	private long startTime, endTime;
+	
+	private double endTime, startTime;
+	private double runTime;
+	
 
 	public Image(String imageLocation) {
 
@@ -35,10 +38,12 @@ public class Image implements Runnable {
 	// TODO
 	public void animate() throws InterruptedException {
 		startTime = System.currentTimeMillis();
-		//while(System.currentTimeMillis() - startTime < endTime){
+	
 		int i = 0;
+		double runTimeOfThread = System.currentTimeMillis() - startTime;
+//		while(( runTimeOfThread - startTime) < runTime * 100){
 		image.setColor(Color.white);
-		if (animationType == "Bounce" || animationType == "bounce") {
+		if ((animationType == "Bounce" || animationType == "bounce") &&  runTimeOfThread < runTime) {
 			while (i < amplitudesOverTime.size()) {
 				float r = rand.nextFloat() % 1;
 				float g = rand.nextFloat() % 1;
@@ -49,14 +54,14 @@ public class Image implements Runnable {
 				i++;
 				pauseTime = randomSleepTime.nextValue();
 				Thread.sleep((long) pauseTime);
-				// }
+				runTimeOfThread = System.currentTimeMillis();
 			}
 		}
 
-		else if (animationType == "random" || animationType == "Random") {
+		else if ((animationType == "random" || animationType == "Random") ) {
 			i++;
-			while (i < amplitudesOverTime.size()) {
-				image.moveTo(amplitudesOverTime.get(i-1),amplitudesOverTime.get(i));
+			while (i < amplitudesOverTime.size() &&  runTimeOfThread < runTime * 1000) {
+				image.moveTo(amplitudesOverTime.get(i-1) * 2,amplitudesOverTime.get(i) * 2);
 				image.show();
 				Thread.sleep((long) pauseTime);
 				pauseTime = randomSleepTime.nextValue();
@@ -65,10 +70,12 @@ public class Image implements Runnable {
 				Thread.sleep(50);
 				System.out.println("Hot hurr");
 				i++;
-				
+				runTimeOfThread = System.currentTimeMillis() - startTime;
+				System.out.println("runtime: " + runTimeOfThread + "stop time: " + runTime * 1000);
 			}
 		}
 	}
+	//}
 	
 	public void run() {
 		// TODO
@@ -97,6 +104,12 @@ public class Image implements Runnable {
 		animationType = animation;
 	}
 	public void setEndTime(double d){
-		
+		endTime = d;
+	}
+	public void setRunTime(double run){
+		runTime = run;
+	}
+	public void setStartTime(double d){
+		startTime = d;
 	}
 }
