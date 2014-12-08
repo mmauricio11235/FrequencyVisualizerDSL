@@ -10,14 +10,15 @@ public class Image implements Runnable {
 
 	private String animationType;
 	private ArrayList<Integer> amplitudesOverTime;
-	private int amplitudeThreshold = 0; 
+	// AmplitudeThreshold will tell image at what amplitudes it should react
+	private int amplitudeThreshold = 0;
 	private int pauseTime = 100;
-	private RandomIntGenerator randomSleepTime = new RandomIntGenerator(100,300);
-	private Resizable2DInterface image; 
+	private RandomIntGenerator randomSleepTime = new RandomIntGenerator(100,
+			300);
+	private Resizable2DInterface image;
 	private Random rand = new Random();
-	
+
 	public Image(String imageLocation) {
-	
 
 	}
 
@@ -26,25 +27,38 @@ public class Image implements Runnable {
 		image = imageLocation;
 	}
 
-	public void setAmplitudeThreshold(int threshold){
+	public void setAmplitudeThreshold(int threshold) {
 		amplitudeThreshold = threshold;
 	}
+
 	// TODO
 	public void animate() throws InterruptedException {
-		int i = 0; 
+		int i = 0;
 		image.setColor(Color.white);
-//		if (animationType == "bounce") {
-			while(i <  amplitudesOverTime.size()){
+		if (animationType == "Bounce" || animationType == "bounce") {
+			while (i < amplitudesOverTime.size()) {
 				float r = rand.nextFloat() % 1;
 				float g = rand.nextFloat() % 1;
 				float b = rand.nextFloat() % 1;
 				System.out.println("Reached animate effectively: " + i);
 				image.setHeight(amplitudesOverTime.get(i));
-				image.setColor(new Color(r,g,b));
+				image.setColor(new Color(r, g, b));
 				i++;
 				pauseTime = randomSleepTime.nextValue();
-				Thread.sleep((long)pauseTime);
-			//}
+				Thread.sleep((long) pauseTime);
+				// }
+			}
+		}
+
+		else if (animationType == "random" || animationType == "Random") {
+			while (i < amplitudesOverTime.size()) {
+				image.moveTo(amplitudesOverTime.get(i),i);
+				Thread.sleep((long) pauseTime);
+				pauseTime = randomSleepTime.nextValue();
+				System.out.println("Hot hurr");
+				i++;
+				
+			}
 		}
 	}
 
@@ -57,16 +71,21 @@ public class Image implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	public void setAmplitudesOverTime(ArrayList<Integer> random){
-		
+
+	public void setAmplitudesOverTime(ArrayList<Integer> random) {
 		amplitudesOverTime = random;
-}
+	}
 
 	public void hide() {
 		// TODO Auto-generated method stub
 		image.hide();
 	}
-	public void show(){
+
+	public void show() {
 		image.show();
+	}
+
+	public void setAnimationType(String animation) {
+		animationType = animation;
 	}
 }

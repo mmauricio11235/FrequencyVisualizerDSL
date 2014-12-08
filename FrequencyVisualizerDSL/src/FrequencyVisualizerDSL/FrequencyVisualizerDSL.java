@@ -75,13 +75,9 @@ public class FrequencyVisualizerDSL {
 	 * runnable class that extends the effect interface
 	 * 
 	 * @param effect
-	 * @return
 	 */
-	public static Effect Effect(String effect) {
-		if (effect.equals("Bounce")) {
-
-		}
-		return null;
+	public static void Effect(String effect) {
+		lastImage.setAnimationType(effect);
 	}
 
 	/**

@@ -17,11 +17,15 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		setMusic("src/Ellie Goulding - Lights (MetroGnome ELECTRO REMIX).wav");
 		setBackgroundImage("https://d1mi3s36zg393u.cloudfront.net/event/207483/og/"
 		+ "97118d4d45c44a0a9361a1b2aba8370c.image!jpeg.288619.jpg.EDC-event-image.jpg");
+		
+		/**
+		 * Not sure if I want to give users this ability. Would be kinda cool	
+		 */
 		//setDimensions();
 		
 		//Cool time to start is 5ish. That's where beat starts.
 		
-		Time(5,100);
+		Time(0,100);
 		Frequency(0,10);
 			Amplitude(0,50);
 				Image(new FilledRect(0,50,100,50, canvas));
@@ -44,7 +48,7 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		Frequency(40,50);
 			Amplitude(0,100);	
 				Image(new FilledRect(500,50,100,50, canvas));
-					Effect("Bounce");
+					Effect("random");
 		Frequency(50,60);
 			Amplitude(0,100);	
 				Image(new FilledRect(600,50,100,50, canvas));
