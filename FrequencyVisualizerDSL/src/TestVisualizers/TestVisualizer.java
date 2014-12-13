@@ -8,25 +8,29 @@ import FrequencyVisualizerDSL.*;
 import objectdraw.*;
 
 public class TestVisualizer extends FrequencyVisualizerDSL{
-	//What about having GUIs? Have sliders and allow people to place object they want to be animated
-	
+
 	
 	public static void main(String[] args) throws LineUnavailableException, IOException, 
 	UnsupportedAudioFileException, InterruptedException {
 		
+		//Music files should be placed in the src folder and given as input in this format. 
+		//Currently only supports AIFF, AU and WAV file formats. (MIDI as well but hasn't been tested) 
 		setMusic("src/Ellie Goulding - Lights (MetroGnome ELECTRO REMIX).wav");
+		
+		//Background image is the web url to any image you want as a background
 		setBackgroundImage("https://d1mi3s36zg393u.cloudfront.net/event/207483/og/"
 		+ "97118d4d45c44a0a9361a1b2aba8370c.image!jpeg.288619.jpg.EDC-event-image.jpg");
 		
-		/**
-		 * Not sure if I want to give users this ability. Would be kinda cool	
+		/** General Structure of the DSL is 
+		 Time(startTime, endTime);
+		 	Frequency(startTime,endTime);
+		 		
+		  
+		 
+		 * 
 		 */
-		//setDimensions();
-		
-		//Cool time to start is 5ish. That's where beat starts.
-		
 		Time(0,5);
-			Frequency(40,50);
+			Frequency(600,50);
 				Amplitude(0,100);	
 				for (int i =0; i < 10; i++){	
 					Image(new FilledOval(500,50,10,10, canvas));

@@ -36,11 +36,19 @@ public class FrequencyVisualizerDSL {
 	}
 
 	public static Frequency Frequency(int start, int end) {
+		
+		if(start > 100 || start < 0 || end < 0 || end >100){
+			throw new IllegalArgumentException("Malformed Interval. Interval start and end should have values between 0 and 100");
+		}
+		else if(start > end ){
+			throw new IllegalArgumentException("Malformed Interval: Start must be smaller than end variable");
+		}
 		Frequency newFrequency = new Frequency(start, end);
 		newestDefinedTime.addFrequency(newFrequency);
 		newestFrequency = newFrequency;
 		return newFrequency;
 	}
+
 
 	/**
 	 * Debating whether or not this should be a structure or attribute to image
