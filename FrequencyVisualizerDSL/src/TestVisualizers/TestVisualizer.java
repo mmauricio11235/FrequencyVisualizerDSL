@@ -12,6 +12,7 @@ import objectdraw.*;
  * This is a simple example of using the Java Music Visualizer DSL
  * 
  * @author Mauricio Molina
+ * @class Domain Specific Language Fall 2014
  *
  */
 public class TestVisualizer extends FrequencyVisualizerDSL{
