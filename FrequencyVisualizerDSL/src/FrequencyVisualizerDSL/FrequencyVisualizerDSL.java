@@ -5,13 +5,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Hashtable;
-
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import objectdraw.*;
 
+/**
+ * Constructs the Intermediary Representation of the DSL. 
+ * 
+ * 
+ * @author Mauricio
+ *
+ */
 public class FrequencyVisualizerDSL {
 
 	protected static AWTFrameCanvas canvas = new AWTFrameCanvas(800, 800);
@@ -34,25 +40,44 @@ public class FrequencyVisualizerDSL {
 	public void begin() {
 		canvas.windowActivated(null);
 	}
+	
+	/**
+	 * Sets up the background image.
+	 * 
+	 * Still need to figure out how to allow the user to change the background
+	 * in a different time.....
+	 * 
+	 * @param imageURL
+	 * @throws IOException
+	 */
+	public static void setBackgroundImage(String imageURL) throws IOException {
+		BufferedImage image = null;
+		URL url = new URL(imageURL);
+		image = ImageIO.read(url);
+		background = new VisibleImage(image, 0, 0, canvas.getWidth(),
+				canvas.getHeight(), canvas);
+	}
 
 	public static Frequency Frequency(int start, int end) {
 		
-		if(start > 100 || start < 0 || end < 0 || end >100){
+		if(start > 100 || start < 0 || end < 0 || end > 100){
 			throw new IllegalArgumentException("Malformed Interval. Interval start and end should have values between 0 and 100");
 		}
 		else if(start > end ){
 			throw new IllegalArgumentException("Malformed Interval: Start must be smaller than end variable");
 		}
+		else{
 		Frequency newFrequency = new Frequency(start, end);
 		newestDefinedTime.addFrequency(newFrequency);
 		newestFrequency = newFrequency;
 		return newFrequency;
 	}
+	}
 
 
 	/**
-	 * Debating whether or not this should be a structure or attribute to image
-	 * objects....
+	 * Optional structure to be used for extra spcificity of what occurs at a given amplitude interval for 
+	 * a given frequency interval. Not fully implemented...still needs extra testing. 
 	 * 
 	 * @param start
 	 * @param end
@@ -65,23 +90,26 @@ public class FrequencyVisualizerDSL {
 		return newAmplitude;
 	}
 
-	/**
-	 * 
-	 * @param d
-	 * @param end
-	 * @return
-	 */
-	public static Time Time(double d, int end) {
-		Time newTime = new Time(d, end);
+
+	public static Time Time(double start, int end) {
+		if(start > 100 || start < 0 || end < 0 || end >100){
+			throw new IllegalArgumentException("Malformed Interval. Interval start and end should have values between 0 and 100");
+		}
+		else if(start > end ){
+			throw new IllegalArgumentException("Malformed Interval: Start must be smaller than end variable");
+		}
+		else{
+		Time newTime = new Time(start, end);
 		newestDefinedTime = newTime;
 		definedTimeList.add(newTime);
 		newestDefinedTime.setRunTimeInSeconds(runTimeInSeconds);
 		return newTime;
 	}
+	}
 
 	/**
 	 * Ideally this will allow users to define their own effect by defining a
-	 * runnable class that extends the effect interface
+	 * runnable class that extends the effect interface.
 	 * 
 	 * @param effect
 	 */
@@ -96,12 +124,6 @@ public class FrequencyVisualizerDSL {
 	 * @param imageLocation
 	 * @return
 	 */
-	// public Image Image(String imageLocation){
-	// Image newImage = new Image(imageLocation);
-	// lastImage = newImage;
-	// return newImage;
-	// }
-	//
 	public static Image Image(Resizable2DInterface imageLocation) {
 		Image newImage = new Image(imageLocation);
 		lastImage = newImage;
@@ -116,7 +138,7 @@ public class FrequencyVisualizerDSL {
 	}
 
 	/**
-	 * 
+	 * Plays the music file and returns information that information used by the DSL. 
 	 * @param musicFileLocation
 	 */
 	public static void setMusic(String musicFileLocation)
@@ -149,29 +171,9 @@ public class FrequencyVisualizerDSL {
 	}
 
 	public static void VisualizerStart() {
-		// TO-DO: Once all the elements have been taken into acccount, create
-		// all threads and start them
+		// Starts the animations as defined for each Time structure
 		for (Time x : definedTimeList) {
 			new Thread(x).start();
 		}
 	}
-
-	/**
-	 * Sets up the background image.
-	 * 
-	 * Still need to figure out how to allow the user to change the background
-	 * in a different time.....
-	 * 
-	 * @param imageURL
-	 * @throws IOException
-	 */
-	public static void setBackgroundImage(String imageURL) throws IOException {
-		BufferedImage image = null;
-		URL url = new URL(imageURL);
-		image = ImageIO.read(url);
-		background = new VisibleImage(image, 0, 0, canvas.getWidth(),
-				canvas.getHeight(), canvas);
-
-	}
-
 }
