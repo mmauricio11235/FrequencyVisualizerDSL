@@ -10,6 +10,8 @@ Aside from that, I have provided a FrequencyVisualizerDSL executable jar that al
 
 Important links: 
 
+[Sample Program](https://github.com/mmauricio11235/FrequencyVisualizerDSL/blob/master/FrequencyVisualizerDSL/src/TestVisualizers/TestVisualizer.java)
+
  
 
 
