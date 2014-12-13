@@ -84,10 +84,18 @@ public class FrequencyVisualizerDSL {
 	 * @return
 	 */
 	public static Amplitude Amplitude(int start, int end) {
+		if(start > 100 || start < 0 || end < 0 || end > 100){
+			throw new IllegalArgumentException("Malformed Interval. Interval start and end should have values between 0 and 100");
+		}
+		else if(start > end ){
+			throw new IllegalArgumentException("Malformed Interval: Start must be smaller than end variable");
+		}
+		else{
 		Amplitude newAmplitude = new Amplitude(start, end);
 		newestFrequency.addAmplitude(newAmplitude);
 		newestAmplitude = newAmplitude;
 		return newAmplitude;
+	}
 	}
 
 
