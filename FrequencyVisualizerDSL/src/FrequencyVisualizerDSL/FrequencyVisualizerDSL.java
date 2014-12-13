@@ -12,11 +12,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import objectdraw.*;
 
 /**
- * Constructs the Intermediary Representation of the DSL. 
+ * Constructs the Intermediary Representation of the DSL.
  * 
  * 
  * @author Mauricio
- *
+ * 
  */
 public class FrequencyVisualizerDSL {
 
@@ -40,7 +40,7 @@ public class FrequencyVisualizerDSL {
 	public void begin() {
 		canvas.windowActivated(null);
 	}
-	
+
 	/**
 	 * Sets up the background image.
 	 * 
@@ -59,60 +59,59 @@ public class FrequencyVisualizerDSL {
 	}
 
 	public static Frequency Frequency(int start, int end) {
-		
-		if(start > 100 || start < 0 || end < 0 || end > 100){
-			throw new IllegalArgumentException("Malformed Interval. Interval start and end should have values between 0 and 100");
-		}
-		else if(start > end ){
-			throw new IllegalArgumentException("Malformed Interval: Start must be smaller than end variable");
-		}
-		else{
-		Frequency newFrequency = new Frequency(start, end);
-		newestDefinedTime.addFrequency(newFrequency);
-		newestFrequency = newFrequency;
-		return newFrequency;
-	}
-	}
 
+		if (start > 100 || start < 0 || end < 0 || end > 100) {
+			throw new IllegalArgumentException(
+					"Malformed Interval. Interval start and end should have values between 0 and 100");
+		} else if (start > end) {
+			throw new IllegalArgumentException(
+					"Malformed Interval: Start must be smaller than end variable");
+		} else {
+			Frequency newFrequency = new Frequency(start, end);
+			newestDefinedTime.addFrequency(newFrequency);
+			newestFrequency = newFrequency;
+			return newFrequency;
+		}
+	}
 
 	/**
-	 * Optional structure to be used for extra spcificity of what occurs at a given amplitude interval for 
-	 * a given frequency interval. Not fully implemented...still needs extra testing. 
+	 * Optional structure to be used for extra spcificity of what occurs at a
+	 * given amplitude interval for a given frequency interval. Not fully
+	 * implemented...still needs extra testing.
 	 * 
 	 * @param start
 	 * @param end
 	 * @return
 	 */
 	public static Amplitude Amplitude(int start, int end) {
-		if(start > 100 || start < 0 || end < 0 || end > 100){
-			throw new IllegalArgumentException("Malformed Interval. Interval start and end should have values between 0 and 100");
+		if (start > 100 || start < 0 || end < 0 || end > 100) {
+			throw new IllegalArgumentException(
+					"Malformed Interval. Interval start and end should have values between 0 and 100");
+		} else if (start > end) {
+			throw new IllegalArgumentException(
+					"Malformed Interval: Start must be smaller than end variable");
+		} else {
+			Amplitude newAmplitude = new Amplitude(start, end);
+			newestFrequency.addAmplitude(newAmplitude);
+			newestAmplitude = newAmplitude;
+			return newAmplitude;
 		}
-		else if(start > end ){
-			throw new IllegalArgumentException("Malformed Interval: Start must be smaller than end variable");
-		}
-		else{
-		Amplitude newAmplitude = new Amplitude(start, end);
-		newestFrequency.addAmplitude(newAmplitude);
-		newestAmplitude = newAmplitude;
-		return newAmplitude;
 	}
-	}
-
 
 	public static Time Time(double start, int end) {
-		if(start > 100 || start < 0 || end < 0 || end >100){
-			throw new IllegalArgumentException("Malformed Interval. Interval start and end should have values between 0 and 100");
+		if (start > 100 || start < 0 || end < 0 || end > 100) {
+			throw new IllegalArgumentException(
+					"Malformed Interval. Interval start and end should have values between 0 and 100");
+		} else if (start > end) {
+			throw new IllegalArgumentException(
+					"Malformed Interval: Start must be smaller than end variable");
+		} else {
+			Time newTime = new Time(start, end);
+			newestDefinedTime = newTime;
+			definedTimeList.add(newTime);
+			newestDefinedTime.setRunTimeInSeconds(runTimeInSeconds);
+			return newTime;
 		}
-		else if(start > end ){
-			throw new IllegalArgumentException("Malformed Interval: Start must be smaller than end variable");
-		}
-		else{
-		Time newTime = new Time(start, end);
-		newestDefinedTime = newTime;
-		definedTimeList.add(newTime);
-		newestDefinedTime.setRunTimeInSeconds(runTimeInSeconds);
-		return newTime;
-	}
 	}
 
 	/**
@@ -122,7 +121,12 @@ public class FrequencyVisualizerDSL {
 	 * @param effect
 	 */
 	public static void Effect(String effect) {
-		lastImage.setAnimationType(effect);
+		if (lastImage == null) {
+			throw new IllegalArgumentException(
+					"No image defined. Image must be defined before setting effect");
+		} else {
+			lastImage.setAnimationType(effect);
+		}
 	}
 
 	/**
@@ -140,13 +144,17 @@ public class FrequencyVisualizerDSL {
 		newestFrequency.addImage(newImage);
 		newImage.setAmplitudesOverTime(random);
 		newImage.setEndTime(newestDefinedTime.getEndTime());
-		newImage.setRunTime(timeIncrement * (newestDefinedTime.getEndTime() - newestDefinedTime.getStartTime()));
-		newImage.setStartTime(newestDefinedTime.getStartTime())
-;		return newImage;
+		newImage.setRunTime(timeIncrement
+				* (newestDefinedTime.getEndTime() - newestDefinedTime
+						.getStartTime()));
+		newImage.setStartTime(newestDefinedTime.getStartTime());
+		return newImage;
 	}
 
 	/**
-	 * Plays the music file and returns information that information used by the DSL. 
+	 * Plays the music file and returns information that information used by the
+	 * DSL.
+	 * 
 	 * @param musicFileLocation
 	 */
 	public static void setMusic(String musicFileLocation)

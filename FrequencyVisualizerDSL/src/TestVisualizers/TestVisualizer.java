@@ -40,9 +40,9 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 		
 		//Initial Twinkling
 		Time(0,5);
-			Frequency(600,50);
+			Frequency(0,100);
 				Amplitude(0,100);	
-				for (int i =0; i < 10; i++){	
+				for (int i =0; i < 10; i++){		
 					Image(new FilledOval(500,50,10,10, canvas));
 						Effect("random");
 				}
@@ -109,8 +109,6 @@ public class TestVisualizer extends FrequencyVisualizerDSL{
 				
 		//This is the required method that comes at the end of all the definitions. Will start the visualizer. 
 		VisualizerStart();
-			
-		
-	}
+		}
 	}
 
